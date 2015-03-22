@@ -1,0 +1,5 @@
+{
+  "require" : {
+    "symfony/expression-language": "3.0.*@dev"
+  }
+}
