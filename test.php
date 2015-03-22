@@ -17,6 +17,11 @@ class PythonString
     {
         return $this->str;
     }
+
+    public function startswith($startswith)
+    {
+        return new PythonBoolean(0 === strpos($this->str, $startswith)) ;
+    }
 }
 
 class PythonNumeric
@@ -37,6 +42,21 @@ class PythonNumeric
         return $this->numeric;
     }
 
+}
+
+class PythonBoolean
+{
+    protected $val;
+
+    public function __construct($val)
+    {
+        $this->val = (bool)$val;
+    }
+
+    public function __toString()
+    {
+        return $this->val ? 'True' : 'False';
+    }
 }
 
 class PythonExecutor
@@ -142,6 +162,8 @@ print int_one + int_two
 print int_two ** 2
 print teststring_one + teststring_two
 print teststring_one + teststring_two + teststring_three
+print teststring_one.startswith("h")
+print teststring_one.startswith("f")
 EOF;
 
 $executor = new PythonExecutor($script);
